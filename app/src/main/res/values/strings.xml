@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Role</string>
+    <string name="title_activity_itinerary_request">ItineraryRequestActivity</string>
 </resources>
