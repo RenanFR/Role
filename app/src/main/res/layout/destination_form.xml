@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data de Ida" />
+
+    <DatePicker
+        android:id="@+id/departure_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data de Volta" />
+
+    <DatePicker
+        android:id="@+id/return_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/hotel_reserved_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Já tem hotel reservado?" />
+
+    <EditText
+        android:id="@+id/hotel_address_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Endereço do Hotel" />
+
+    <EditText
+        android:id="@+id/destination_country_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="País de Destino" />
+
+    <EditText
+        android:id="@+id/destination_city_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cidade de Destino" />
+
+    <EditText
+        android:id="@+id/budget_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Orçamento (ex: 1000 EUR, 500 GBP)" />
+
+    <EditText
+        android:id="@+id/travel_purpose_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Propósito da Viagem" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Áreas de Interesse" />
+
+    <TableLayout
+        android:id="@+id/interests_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

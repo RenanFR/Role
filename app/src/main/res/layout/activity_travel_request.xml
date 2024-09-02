@@ -14,93 +14,49 @@
             android:id="@+id/name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome" />
+            android:hint="Nome"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/cpf_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CPF" />
+            android:hint="CPF"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail" />
+            android:hint="E-mail"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/age_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Idade" />
+            android:hint="Idade"
+            android:minHeight="48dp" />
 
         <Spinner
             android:id="@+id/gender_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/gender_array" />
+            android:entries="@array/gender_array"
+            android:minHeight="48dp" />
 
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/destinations_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data de Ida" />
+            android:orientation="vertical" />
 
-        <DatePicker
-            android:id="@+id/departure_date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/add_destination_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data de Volta" />
-
-        <DatePicker
-            android:id="@+id/return_date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <CheckBox
-            android:id="@+id/hotel_reserved_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Já tem hotel reservado?" />
-
-        <EditText
-            android:id="@+id/hotel_address_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Endereço do Hotel" />
-
-
-        <EditText
-            android:id="@+id/destination_country_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="País de Destino" />
-
-        <EditText
-            android:id="@+id/destination_city_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cidade de Destino" />
-
-
-        <EditText
-            android:id="@+id/budget_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Orçamento (ex: 1000 EUR, 500 GBP)" />
-
-
-        <EditText
-            android:id="@+id/travel_purpose_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Propósito da Viagem" />
-
+            android:text="Adicionar Destino" />
 
         <TextView
             android:layout_width="match_parent"
@@ -124,13 +80,8 @@
             android:id="@+id/notes_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Observações" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Áreas de Interesse" />
+            android:hint="Observações"
+            android:minHeight="48dp" />
 
         <TableLayout
             android:id="@+id/interests_table"

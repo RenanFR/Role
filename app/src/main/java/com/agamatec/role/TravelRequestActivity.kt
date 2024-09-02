@@ -18,7 +18,9 @@ import java.io.IOException
 class TravelRequestActivity : AppCompatActivity() {
 
     private lateinit var travelersLayout: LinearLayout
+    private lateinit var destinationsLayout: LinearLayout
     private var travelerCount = 1
+    private var destinationCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +29,16 @@ class TravelRequestActivity : AppCompatActivity() {
         Log.d("TravelRequestActivity", "onCreate: Activity inicializada")
 
         travelersLayout = findViewById(R.id.travelers_layout)
+        destinationsLayout = findViewById(R.id.destinations_layout)
 
         findViewById<Button>(R.id.add_traveler_button).setOnClickListener {
             Log.d("TravelRequestActivity", "onCreate: Botão de adicionar viajante clicado")
             addTravelerForm()
+        }
+
+        findViewById<Button>(R.id.add_destination_button).setOnClickListener {
+            Log.d("TravelRequestActivity", "onCreate: Botão de adicionar destino clicado")
+            addDestinationForm()
         }
 
         findViewById<Button>(R.id.submit_button).setOnClickListener {
@@ -44,6 +52,13 @@ class TravelRequestActivity : AppCompatActivity() {
         val travelerForm = layoutInflater.inflate(R.layout.traveler_form, null)
         travelersLayout.addView(travelerForm)
         travelerCount++
+    }
+
+    private fun addDestinationForm() {
+        Log.d("TravelRequestActivity", "addDestinationForm: Adicionando formulário de destino")
+        val destinationForm = layoutInflater.inflate(R.layout.destination_form, null)
+        destinationsLayout.addView(destinationForm)
+        destinationCount++
     }
 
     private fun submitForm() {
@@ -63,10 +78,7 @@ class TravelRequestActivity : AppCompatActivity() {
 
             val client = OkHttpClient()
             val url = "http://10.0.2.2:8080/api/travel/submit"
-            val request = Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build()
+            val request = Request.Builder().url(url).post(requestBody).build()
 
             Log.d("TravelRequestActivity", "submitForm: Requisição construída, URL: $url")
 
@@ -103,9 +115,7 @@ class TravelRequestActivity : AppCompatActivity() {
                     Log.e("API_ERROR", "Exceção na requisição", e)
                     runOnUiThread {
                         Toast.makeText(
-                            this,
-                            "Erro ao conectar à API: ${e.message}",
-                            Toast.LENGTH_SHORT
+                            this, "Erro ao conectar à API: ${e.message}", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
@@ -120,8 +130,7 @@ class TravelRequestActivity : AppCompatActivity() {
 
     private fun navigateToNextSteps() {
         Log.d(
-            "TravelRequestActivity",
-            "navigateToNextSteps: Navegando para a tela de próximos passos"
+            "TravelRequestActivity", "navigateToNextSteps: Navegando para a tela de próximos passos"
         )
         val intent = Intent(this, NextStepsActivity::class.java)
         startActivity(intent)
