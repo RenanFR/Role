@@ -11,7 +11,7 @@ class NextStepsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_next_steps)
 
         findViewById<Button>(R.id.exit_button).setOnClickListener {
-            finishAffinity()  
+            finishAffinity()
         }
     }
 }
