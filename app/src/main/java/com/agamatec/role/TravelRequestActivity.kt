@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -12,6 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
@@ -65,10 +70,88 @@ class TravelRequestActivity : AppCompatActivity() {
         Log.d("TravelRequestActivity", "submitForm: Iniciando processo de envio de formulário")
 
         try {
+
+            val name = findViewById<EditText>(R.id.name_edit_text).text.toString()
+            val cpf = findViewById<EditText>(R.id.cpf_edit_text).text.toString()
+            val email = findViewById<EditText>(R.id.email_edit_text).text.toString()
+            val age = findViewById<EditText>(R.id.age_edit_text).text.toString().toIntOrNull()
+            val gender = findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
+
+
+            val destinations = JSONArray()
+            for (i in 0 until destinationsLayout.childCount) {
+                val destinationView = destinationsLayout.getChildAt(i)
+
+                val departureDate =
+                    (destinationView.findViewById<DatePicker>(R.id.departure_date_picker)).let {
+                        "${it.dayOfMonth}/${it.month + 1}/${it.year}"
+                    }
+                val returnDate =
+                    (destinationView.findViewById<DatePicker>(R.id.return_date_picker)).let {
+                        "${it.dayOfMonth}/${it.month + 1}/${it.year}"
+                    }
+                val hotelReserved =
+                    destinationView.findViewById<CheckBox>(R.id.hotel_reserved_checkbox).isChecked
+                val hotelAddress =
+                    destinationView.findViewById<EditText>(R.id.hotel_address_edit_text).text.toString()
+                val country =
+                    destinationView.findViewById<EditText>(R.id.destination_country_edit_text).text.toString()
+                val city =
+                    destinationView.findViewById<EditText>(R.id.destination_city_edit_text).text.toString()
+                val budget =
+                    destinationView.findViewById<EditText>(R.id.budget_edit_text).text.toString()
+                val purpose =
+                    destinationView.findViewById<EditText>(R.id.travel_purpose_edit_text).text.toString()
+
+                val destinationJson = JSONObject().apply {
+                    put("departureDate", departureDate)
+                    put("returnDate", returnDate)
+                    put("hotelReserved", hotelReserved)
+                    put("hotelAddress", hotelAddress)
+                    put("country", country)
+                    put("city", city)
+                    put("budget", budget)
+                    put("purpose", purpose)
+                }
+                destinations.put(destinationJson)
+            }
+
+
+            val travelers = JSONArray()
+            for (i in 0 until travelersLayout.childCount) {
+                val travelerView = travelersLayout.getChildAt(i)
+
+                val travelerName =
+                    travelerView.findViewById<EditText>(R.id.name_edit_text).text.toString()
+                val travelerCpf =
+                    travelerView.findViewById<EditText>(R.id.cpf_edit_text).text.toString()
+                val travelerEmail =
+                    travelerView.findViewById<EditText>(R.id.email_edit_text).text.toString()
+                val travelerAge =
+                    travelerView.findViewById<EditText>(R.id.age_edit_text).text.toString()
+                        .toIntOrNull()
+                val travelerGender =
+                    travelerView.findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
+
+                val travelerJson = JSONObject().apply {
+                    put("name", travelerName)
+                    put("cpf", travelerCpf)
+                    put("email", travelerEmail)
+                    put("age", travelerAge)
+                    put("gender", travelerGender)
+                }
+                travelers.put(travelerJson)
+            }
+
+
             val jsonBody = JSONObject().apply {
-                put("name", "Nome do Viajante")
-                put("cpf", "000.000.000-00")
-                put("email", "email@exemplo.com")
+                put("name", name)
+                put("cpf", cpf)
+                put("email", email)
+                put("age", age)
+                put("gender", gender)
+                put("destinations", destinations)
+                put("travelers", travelers)
             }
 
             val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -115,7 +198,9 @@ class TravelRequestActivity : AppCompatActivity() {
                     Log.e("API_ERROR", "Exceção na requisição", e)
                     runOnUiThread {
                         Toast.makeText(
-                            this, "Erro ao conectar à API: ${e.message}", Toast.LENGTH_SHORT
+                            this,
+                            "Erro ao conectar à API: ${e.message}",
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
@@ -127,6 +212,7 @@ class TravelRequestActivity : AppCompatActivity() {
                 .show()
         }
     }
+
 
     private fun navigateToNextSteps() {
         Log.d(
