@@ -8,21 +8,27 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome do Viajante" />
+        android:hint="Nome do Viajante"
+        android:minHeight="48dp" />
 
     <EditText
+        android:id="@+id/birth_date_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data de Nascimento" />
+        android:hint="Data de Nascimento"
+        android:minHeight="48dp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/gender_array" />
+        android:entries="@array/gender_array"
+        android:minHeight="48dp" />
 
     <EditText
+        android:id="@+id/filiation_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Filiação" />
+        android:hint="Filiação"
+        android:minHeight="48dp" />
 
 </LinearLayout>
