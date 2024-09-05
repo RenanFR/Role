@@ -28,33 +28,24 @@ class TravelRequestActivityTest {
 
     @Test
     fun preencherFormularioComSegmentacaoDeDatas() {
-
-
         onView(withId(R.id.name_edit_text)).perform(
             typeText("Renan Fernandes Rodrigues"), closeSoftKeyboard()
         )
 
-
         onView(withId(R.id.cpf_edit_text)).perform(typeText("151.311.560-09"), closeSoftKeyboard())
-
 
         onView(withId(R.id.email_edit_text)).perform(
             typeText("renanfr1047@gmail.com"), closeSoftKeyboard()
         )
 
-
         onView(withId(R.id.birthdate_date_picker)).perform(setDate(1997, 6, 18))
-
 
         onView(withId(R.id.gender_spinner)).perform(click())
         onView(withText("Masculino")).perform(click())
 
-
         onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
 
-
         onView(withId(R.id.segment_dates_checkbox)).perform(scrollTo(), click())
-
 
         onView(withId(R.id.departure_date_picker)).perform(
             scrollTo(), setDate(2024, 10, 26)
@@ -63,14 +54,12 @@ class TravelRequestActivityTest {
             scrollTo(), setDate(2024, 10, 28)
         )
 
-
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
             scrollTo(),
             replaceText("Paseo Reina Cristina, 7, Retiro, 28014 Madrid, España"),
             closeSoftKeyboard()
         )
-
 
         onView(withId(R.id.destination_country_edit_text)).perform(
             scrollTo(), typeText("Espanha"), closeSoftKeyboard()
@@ -82,7 +71,6 @@ class TravelRequestActivityTest {
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
 
-
         onView(withId(R.id.add_date_button)).perform(scrollTo(), click())
         onView(withId(R.id.departure_date_picker)).perform(
             scrollTo(), setDate(2024, 11, 3)
@@ -92,8 +80,10 @@ class TravelRequestActivityTest {
         )
 
 
-        onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
+        onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
+
+        onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
@@ -111,7 +101,6 @@ class TravelRequestActivityTest {
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
 
-
         onView(withId(R.id.departure_date_picker)).perform(
             scrollTo(), setDate(2024, 10, 28)
         )
@@ -120,8 +109,10 @@ class TravelRequestActivityTest {
         )
 
 
-        onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
+        onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
+
+        onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
@@ -139,13 +130,15 @@ class TravelRequestActivityTest {
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
 
-
         onView(withId(R.id.departure_date_picker)).perform(
             scrollTo(), setDate(2024, 11, 7)
         )
         onView(withId(R.id.return_date_picker)).perform(
             scrollTo(), setDate(2024, 11, 9)
         )
+
+
+        onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
 
         onView(withId(R.id.add_traveler_button)).perform(scrollTo(), click())
@@ -161,9 +154,7 @@ class TravelRequestActivityTest {
         onView(withId(R.id.additional_traveler_gender_spinner)).perform(scrollTo(), click())
         onView(withText("Feminino")).perform(click())
 
-
         onView(withId(R.id.confirm_traveler_button)).perform(scrollTo(), click())
-
 
         onView(withId(R.id.notes_edit_text)).perform(
             scrollTo(),

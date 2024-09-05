@@ -28,6 +28,7 @@ class TravelRequestActivity : AppCompatActivity() {
     private lateinit var destinationsLayout: LinearLayout
     private var travelerCount = 1
     private val travelersList = mutableListOf<JSONObject>()
+    private val destinationsList = mutableListOf<JSONObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +58,12 @@ class TravelRequestActivity : AppCompatActivity() {
     private fun addTravelerForm() {
         Log.d("TravelRequestActivity", "addTravelerForm: Adicionando formulário de viajante")
 
-
         if (travelersLayout.childCount > 0) {
             travelersLayout.removeAllViews()
         }
 
         val travelerForm = layoutInflater.inflate(R.layout.traveler_form, null)
         travelersLayout.addView(travelerForm)
-
 
         val addTravelerButton = travelerForm.findViewById<Button>(R.id.confirm_traveler_button)
 
@@ -82,33 +81,24 @@ class TravelRequestActivity : AppCompatActivity() {
             val year = travelerBirthDatePicker.year
             val travelerBirthDate = "$day/$month/$year"
 
-
             val travelerJson = JSONObject().apply {
                 put("name", travelerName)
                 put("birthdate", travelerBirthDate)
                 put("gender", travelerGender)
             }
 
-
             travelersList.add(travelerJson)
-
 
             val travelerLabel = TextView(this)
             travelerLabel.text =
                 "Viajante: $travelerName - Nascimento: $travelerBirthDate - Gênero: $travelerGender"
             travelersLayout.addView(travelerLabel)
 
-
             travelersLayout.removeView(travelerForm)
         }
     }
 
     private fun addDestinationForm() {
-
-        if (destinationsLayout.childCount > 0) {
-            destinationsLayout.removeAllViews()
-        }
-
         val destinationForm = layoutInflater.inflate(R.layout.destination_form, null)
         destinationsLayout.addView(destinationForm)
 
@@ -117,8 +107,10 @@ class TravelRequestActivity : AppCompatActivity() {
         val segmentDatesCheckbox =
             destinationForm.findViewById<CheckBox>(R.id.segment_dates_checkbox)
 
+
         val initialDatePair = layoutInflater.inflate(R.layout.date_pair_form, null)
         datesLayout.addView(initialDatePair)
+
 
         val datesList = mutableListOf<Pair<String, String>>()
 
@@ -127,6 +119,7 @@ class TravelRequestActivity : AppCompatActivity() {
                 addDateButton.visibility = View.VISIBLE
             } else {
                 addDateButton.visibility = View.GONE
+
 
                 while (datesLayout.childCount > 1) {
                     datesLayout.removeViewAt(1)
@@ -138,12 +131,10 @@ class TravelRequestActivity : AppCompatActivity() {
         addDateButton.visibility = View.GONE
 
         addDateButton.setOnClickListener {
+
+            datesLayout.removeAllViews()
+
             val datePairView = layoutInflater.inflate(R.layout.date_pair_form, null)
-
-            if (datesLayout.childCount > 0) {
-                datesLayout.removeAllViews()
-            }
-
             datesLayout.addView(datePairView)
 
             val departureDate = datePairView.findViewById<DatePicker>(R.id.departure_date_picker)
@@ -160,7 +151,49 @@ class TravelRequestActivity : AppCompatActivity() {
             dateLabel.text = "Ida: $departureDateFormatted - Volta: $returnDateFormatted"
             datesLayout.addView(dateLabel)
         }
+
+        destinationForm.findViewById<Button>(R.id.confirm_destination_button).setOnClickListener {
+            val hotelReserved =
+                destinationForm.findViewById<CheckBox>(R.id.hotel_reserved_checkbox).isChecked
+            val hotelAddress =
+                destinationForm.findViewById<EditText>(R.id.hotel_address_edit_text).text.toString()
+            val country =
+                destinationForm.findViewById<EditText>(R.id.destination_country_edit_text).text.toString()
+            val city =
+                destinationForm.findViewById<EditText>(R.id.destination_city_edit_text).text.toString()
+            val budget =
+                destinationForm.findViewById<EditText>(R.id.budget_edit_text).text.toString()
+            val purpose =
+                destinationForm.findViewById<EditText>(R.id.travel_purpose_edit_text).text.toString()
+
+            val destinationJson = JSONObject().apply {
+                put("dateRanges", JSONArray().apply {
+                    datesList.forEach { (departure, returnDate) ->
+                        put(JSONObject().apply {
+                            put("departureDate", departure)
+                            put("returnDate", returnDate)
+                        })
+                    }
+                })
+                put("hotelReserved", hotelReserved)
+                put("hotelAddress", hotelAddress)
+                put("country", country)
+                put("city", city)
+                put("budget", budget)
+                put("purpose", purpose)
+            }
+
+            destinationsList.add(destinationJson)
+
+            val destinationLabel = TextView(this)
+            destinationLabel.text = "Destino: $city, $country - Orçamento: $budget"
+            destinationsLayout.addView(destinationLabel)
+
+
+            destinationsLayout.removeView(destinationForm)
+        }
     }
+
 
     private fun submitForm() {
         Log.d("TravelRequestActivity", "submitForm: Iniciando processo de envio de formulário")
@@ -176,56 +209,6 @@ class TravelRequestActivity : AppCompatActivity() {
 
             val gender = findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
 
-            val destinations = JSONArray()
-            for (i in 0 until destinationsLayout.childCount) {
-                val destinationView = destinationsLayout.getChildAt(i)
-                val datesLayout = destinationView.findViewById<LinearLayout>(R.id.dates_layout)
-
-                val datesArray = JSONArray()
-                for (j in 0 until datesLayout.childCount) {
-                    val datePairView = datesLayout.getChildAt(j)
-
-                    val departureDate =
-                        (datePairView.findViewById<DatePicker>(R.id.departure_date_picker)).let {
-                            "${it.dayOfMonth}/${it.month + 1}/${it.year}"
-                        }
-                    val returnDate =
-                        (datePairView.findViewById<DatePicker>(R.id.return_date_picker)).let {
-                            "${it.dayOfMonth}/${it.month + 1}/${it.year}"
-                        }
-                    val hotelReserved =
-                        destinationView.findViewById<CheckBox>(R.id.hotel_reserved_checkbox).isChecked
-                    val hotelAddress =
-                        destinationView.findViewById<EditText>(R.id.hotel_address_edit_text).text.toString()
-                    val country =
-                        destinationView.findViewById<EditText>(R.id.destination_country_edit_text).text.toString()
-                    val city =
-                        destinationView.findViewById<EditText>(R.id.destination_city_edit_text).text.toString()
-                    val budget =
-                        destinationView.findViewById<EditText>(R.id.budget_edit_text).text.toString()
-                    val purpose =
-                        destinationView.findViewById<EditText>(R.id.travel_purpose_edit_text).text.toString()
-
-                    val datePairJson = JSONObject().apply {
-                        put("departureDate", departureDate)
-                        put("returnDate", returnDate)
-                    }
-
-                    datesArray.put(datePairJson)
-                    val destinationJson = JSONObject().apply {
-                        put("dateRanges", datesArray)
-                        put("hotelReserved", hotelReserved)
-                        put("hotelAddress", hotelAddress)
-                        put("country", country)
-                        put("city", city)
-                        put("budget", budget)
-                        put("purpose", purpose)
-                    }
-
-                    destinations.put(destinationJson)
-                }
-            }
-
 
             val jsonBody = JSONObject().apply {
                 put("mainTraveler", JSONObject().apply {
@@ -235,7 +218,7 @@ class TravelRequestActivity : AppCompatActivity() {
                     put("birthdate", birthdate)
                     put("gender", gender)
                 })
-                put("destinations", destinations)
+                put("destinations", JSONArray(destinationsList))
                 put("travelers", JSONArray(travelersList))
             }
 
@@ -305,7 +288,3 @@ class TravelRequestActivity : AppCompatActivity() {
         finish()
     }
 }
-
-
-
-
