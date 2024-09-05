@@ -72,6 +72,8 @@ class TravelRequestActivity : AppCompatActivity() {
 
             val travelerName =
                 travelerForm.findViewById<EditText>(R.id.additional_traveler_name_edit_text).text.toString()
+            val travelerFiliation =
+                travelerForm.findViewById<EditText>(R.id.additional_traveler_filiation_edit_text).text.toString()
             val travelerBirthDatePicker =
                 travelerForm.findViewById<DatePicker>(R.id.additional_traveler_birth_date_picker)
             val travelerGender =
@@ -86,18 +88,20 @@ class TravelRequestActivity : AppCompatActivity() {
                 put("name", travelerName)
                 put("birthdate", travelerBirthDate)
                 put("gender", travelerGender)
+                put("filiation", travelerFiliation)
             }
 
             travelersList.add(travelerJson)
 
             val travelerLabel = TextView(this)
             travelerLabel.text =
-                "Viajante: $travelerName - Nascimento: $travelerBirthDate - Gênero: $travelerGender"
+                "Viajante: $travelerName - Nascimento: $travelerBirthDate - Gênero: $travelerGender - Filiação: $travelerFiliation"
             travelersLayout.addView(travelerLabel)
 
             travelersLayout.removeView(travelerForm)
         }
     }
+
 
     private fun addDestinationForm() {
         val destinationForm = layoutInflater.inflate(R.layout.destination_form, null)
@@ -303,8 +307,7 @@ class TravelRequestActivity : AppCompatActivity() {
 
     private fun navigateToNextSteps() {
         Log.d(
-            "TravelRequestActivity",
-            "navigateToNextSteps: Navegando para a tela de próximos passos"
+            "TravelRequestActivity", "navigateToNextSteps: Navegando para a tela de próximos passos"
         )
         val intent = Intent(this, NextStepsActivity::class.java)
         startActivity(intent)
