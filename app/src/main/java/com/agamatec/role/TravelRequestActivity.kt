@@ -3,13 +3,7 @@ package com.agamatec.role
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -19,6 +13,7 @@ import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
 
 class TravelRequestActivity : AppCompatActivity() {
 
@@ -71,10 +66,16 @@ class TravelRequestActivity : AppCompatActivity() {
 
         try {
 
+
             val name = findViewById<EditText>(R.id.name_edit_text).text.toString()
             val cpf = findViewById<EditText>(R.id.cpf_edit_text).text.toString()
             val email = findViewById<EditText>(R.id.email_edit_text).text.toString()
-            val age = findViewById<EditText>(R.id.age_edit_text).text.toString().toIntOrNull()
+
+
+            val birthdatePicker = findViewById<DatePicker>(R.id.birthdate_date_picker)
+            val birthdate =
+                "${birthdatePicker.dayOfMonth}/${birthdatePicker.month + 1}/${birthdatePicker.year}"
+
             val gender = findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
 
 
@@ -123,25 +124,38 @@ class TravelRequestActivity : AppCompatActivity() {
 
                 val travelerName =
                     travelerView.findViewById<EditText>(R.id.additional_traveler_name_edit_text).text.toString()
+                val travelerBirthDatePicker =
+                    travelerView.findViewById<DatePicker>(R.id.additional_traveler_birth_date_picker)
+                val day = travelerBirthDatePicker.dayOfMonth
+                val month = travelerBirthDatePicker.month + 1
+                val year = travelerBirthDatePicker.year
+
+
+                val travelerBirthDate = "$day/$month/$year"
 
                 val travelerGender =
                     travelerView.findViewById<Spinner>(R.id.additional_traveler_gender_spinner).selectedItem.toString()
+                val travelerFiliation =
+                    travelerView.findViewById<EditText>(R.id.additional_traveler_filiation_edit_text).text.toString()
 
                 val travelerJson = JSONObject().apply {
                     put("name", travelerName)
-
+                    put("birthdate", travelerBirthDate)
                     put("gender", travelerGender)
+                    put("filiation", travelerFiliation)
                 }
                 travelers.put(travelerJson)
             }
 
 
             val jsonBody = JSONObject().apply {
-                put("name", name)
-                put("cpf", cpf)
-                put("email", email)
-                put("age", age)
-                put("gender", gender)
+                put("mainTraveler", JSONObject().apply {
+                    put("name", name)
+                    put("cpf", cpf)
+                    put("email", email)
+                    put("birthdate", birthdate)
+                    put("gender", gender)
+                })
                 put("destinations", destinations)
                 put("travelers", travelers)
             }
@@ -202,7 +216,6 @@ class TravelRequestActivity : AppCompatActivity() {
                 .show()
         }
     }
-
 
     private fun navigateToNextSteps() {
         Log.d(

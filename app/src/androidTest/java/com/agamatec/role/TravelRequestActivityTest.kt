@@ -37,7 +37,8 @@ class TravelRequestActivityTest {
         )
 
 
-        onView(withId(R.id.age_edit_text)).perform(typeText("28"), closeSoftKeyboard())
+        onView(withId(R.id.birthdate_date_picker)).perform(setDate(1997, 6, 18))
+
 
 
         onView(withId(R.id.gender_spinner)).perform(click())
@@ -50,8 +51,6 @@ class TravelRequestActivityTest {
         onView(withId(R.id.destination_city_edit_text)).perform(
             scrollTo(), typeText("Madrid"), closeSoftKeyboard()
         )
-
-
         onView(withId(R.id.destination_country_edit_text)).perform(
             scrollTo(), typeText("Espanha"), closeSoftKeyboard()
         )
@@ -87,16 +86,17 @@ class TravelRequestActivityTest {
         onView(withId(R.id.additional_traveler_name_edit_text)).perform(
             scrollTo(), replaceText("Maria Jéssica Pereira Mendes"), closeSoftKeyboard()
         )
-
-
         onView(withId(R.id.additional_traveler_filiation_edit_text)).perform(
             scrollTo(), replaceText("Noiva"), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.additional_traveler_birth_date_edit_text)).perform(
-            scrollTo(), replaceText("07/08/1997"), closeSoftKeyboard()
+
+        onView(withId(R.id.additional_traveler_birth_date_picker)).perform(
+            scrollTo(), setDate(1997, 8, 7)
         )
+
+
 
 
         onView(withId(R.id.additional_traveler_gender_spinner)).perform(scrollTo(), click())

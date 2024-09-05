@@ -12,12 +12,13 @@
         android:hint="Nome do Viajante"
         android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/additional_traveler_birth_date_edit_text"
+    <DatePicker
+        android:id="@+id/additional_traveler_birth_date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data de Nascimento"
-        android:minHeight="48dp" />
+        android:calendarViewShown="true"
+        android:datePickerMode="spinner" />
+
 
     <Spinner
         android:id="@+id/additional_traveler_gender_spinner"
