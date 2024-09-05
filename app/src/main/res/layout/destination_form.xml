@@ -5,29 +5,24 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
+    <CheckBox
+        android:id="@+id/segment_dates_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Data de Ida" />
+        android:text="Segmentar Período de Datas?" />
 
-    <DatePicker
-        android:id="@+id/departure_date_picker"
+    <LinearLayout
+        android:id="@+id/dates_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
+        android:orientation="vertical" />
 
-    <TextView
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/add_date_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Data de Volta" />
+        android:text="Adicionar Mais Datas" />
 
-    <DatePicker
-        android:id="@+id/return_date_picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
 
     <CheckBox
         android:id="@+id/hotel_reserved_checkbox"
