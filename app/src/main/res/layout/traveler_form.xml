@@ -16,7 +16,7 @@
         android:id="@+id/additional_traveler_birth_date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:calendarViewShown="true"
+        android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
 

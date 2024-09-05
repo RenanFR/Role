@@ -13,7 +13,9 @@
     <DatePicker
         android:id="@+id/departure_date_picker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
     <TextView
         android:layout_width="match_parent"
@@ -23,7 +25,9 @@
     <DatePicker
         android:id="@+id/return_date_picker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
     <CheckBox
         android:id="@+id/hotel_reserved_checkbox"
