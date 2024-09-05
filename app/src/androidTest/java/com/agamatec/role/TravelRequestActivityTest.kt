@@ -8,7 +8,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Matcher
 import org.junit.Rule
@@ -48,57 +47,70 @@ class TravelRequestActivityTest {
         onView(withId(R.id.add_destination_button)).perform(click())
 
 
-        onView(withId(R.id.destination_city_edit_text)).check(matches(isDisplayed()))
         onView(withId(R.id.destination_city_edit_text)).perform(
-            typeText("Madrid"), closeSoftKeyboard()
+            scrollTo(), typeText("Madrid"), closeSoftKeyboard()
         )
-
 
 
         onView(withId(R.id.destination_country_edit_text)).perform(
-            typeText("Espanha"), closeSoftKeyboard()
+            scrollTo(), typeText("Espanha"), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.budget_edit_text)).perform(typeText("1000 EUR"), closeSoftKeyboard())
+        onView(withId(R.id.budget_edit_text)).perform(
+            scrollTo(), typeText("1000 EUR"), closeSoftKeyboard()
+        )
 
 
         onView(withId(R.id.hotel_address_edit_text)).perform(
-            typeText("Calle Mayor, 10"), closeSoftKeyboard()
+            scrollTo(), replaceText(
+                "Paseo Reina Cristina, 7, Retiro, 28014\n" + "Madrid, España"
+            ), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.hotel_reserved_checkbox)).perform(click())
+        onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
 
 
-        onView(withId(R.id.departure_date_picker)).perform(setDate(2024, 9, 15))
-
-
-        onView(withId(R.id.return_date_picker)).perform(setDate(2024, 9, 20))
+        onView(withId(R.id.departure_date_picker)).perform(scrollTo(), setDate(2024, 9, 15))
+        onView(withId(R.id.return_date_picker)).perform(scrollTo(), setDate(2024, 9, 20))
 
 
         onView(withId(R.id.travel_purpose_edit_text)).perform(
-            typeText("Férias"), closeSoftKeyboard()
+            scrollTo(), replaceText("Férias"), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.add_traveler_button)).perform(click())
+        onView(withId(R.id.add_traveler_button)).perform(scrollTo(), click())
 
 
-        onView(withId(R.id.name_edit_text)).perform(
-            typeText("Maria Jéssica Pereira Mendes"), closeSoftKeyboard()
+        onView(withId(R.id.additional_traveler_name_edit_text)).perform(
+            scrollTo(), replaceText("Maria Jéssica Pereira Mendes"), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.filiation_edit_text)).perform(typeText("Filha"), closeSoftKeyboard())
-
-
-        onView(withId(R.id.birth_date_edit_text)).perform(
-            typeText("15/05/1995"), closeSoftKeyboard()
+        onView(withId(R.id.additional_traveler_filiation_edit_text)).perform(
+            scrollTo(), replaceText("Noiva"), closeSoftKeyboard()
         )
 
 
-        onView(withId(R.id.submit_button)).perform(click())
+        onView(withId(R.id.additional_traveler_birth_date_edit_text)).perform(
+            scrollTo(), replaceText("07/08/1997"), closeSoftKeyboard()
+        )
+
+
+        onView(withId(R.id.additional_traveler_gender_spinner)).perform(scrollTo(), click())
+        onView(withText("Feminino")).perform(click())
+
+
+        onView(withId(R.id.notes_edit_text)).perform(
+            scrollTo(),
+            replaceText("Por favor, adicionar observações sobre restrições alimentares."),
+            closeSoftKeyboard()
+        )
+
+
+        onView(withId(R.id.submit_button)).perform(scrollTo(), click())
     }
 
 
