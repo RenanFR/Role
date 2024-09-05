@@ -68,9 +68,7 @@ class TravelRequestActivityTest {
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
-            scrollTo(),
-            replaceText("Paseo Reina Cristina, 7, Retiro, 28014 Madrid, España"),
-            closeSoftKeyboard()
+            scrollTo(), replaceText("Paseo Reina Cristina, 7, Retiro, 28014"), closeSoftKeyboard()
         )
 
         onView(withId(R.id.destination_country_edit_text)).perform(
@@ -98,9 +96,7 @@ class TravelRequestActivityTest {
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
-            scrollTo(),
-            replaceText("Lepanto, 406, Horta-Guinardó, 08025 Barcelona, Espanha"),
-            closeSoftKeyboard()
+            scrollTo(), replaceText("Lepanto, 406, Horta-Guinardó, 08025"), closeSoftKeyboard()
         )
         onView(withId(R.id.destination_country_edit_text)).perform(
             scrollTo(), typeText("Espanha"), closeSoftKeyboard()
@@ -127,9 +123,7 @@ class TravelRequestActivityTest {
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
-            scrollTo(),
-            replaceText("Aragón, 28, 07800 Cidade de Ibiza, Espanha"),
-            closeSoftKeyboard()
+            scrollTo(), replaceText("Aragón, 28, 07800"), closeSoftKeyboard()
         )
         onView(withId(R.id.destination_country_edit_text)).perform(
             scrollTo(), typeText("Espanha"), closeSoftKeyboard()
@@ -166,7 +160,7 @@ class TravelRequestActivityTest {
             closeSoftKeyboard()
         )
 
-        
+
         onView(withId(R.id.submit_button)).perform(scrollTo(), click())
     }
 
