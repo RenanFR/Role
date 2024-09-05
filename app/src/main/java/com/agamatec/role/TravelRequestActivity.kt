@@ -122,22 +122,14 @@ class TravelRequestActivity : AppCompatActivity() {
                 val travelerView = travelersLayout.getChildAt(i)
 
                 val travelerName =
-                    travelerView.findViewById<EditText>(R.id.name_edit_text).text.toString()
-                val travelerCpf =
-                    travelerView.findViewById<EditText>(R.id.cpf_edit_text).text.toString()
-                val travelerEmail =
-                    travelerView.findViewById<EditText>(R.id.email_edit_text).text.toString()
-                val travelerAge =
-                    travelerView.findViewById<EditText>(R.id.age_edit_text).text.toString()
-                        .toIntOrNull()
+                    travelerView.findViewById<EditText>(R.id.additional_traveler_name_edit_text).text.toString()
+
                 val travelerGender =
-                    travelerView.findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
+                    travelerView.findViewById<Spinner>(R.id.additional_traveler_gender_spinner).selectedItem.toString()
 
                 val travelerJson = JSONObject().apply {
                     put("name", travelerName)
-                    put("cpf", travelerCpf)
-                    put("email", travelerEmail)
-                    put("age", travelerAge)
+
                     put("gender", travelerGender)
                 }
                 travelers.put(travelerJson)
@@ -198,9 +190,7 @@ class TravelRequestActivity : AppCompatActivity() {
                     Log.e("API_ERROR", "Exceção na requisição", e)
                     runOnUiThread {
                         Toast.makeText(
-                            this,
-                            "Erro ao conectar à API: ${e.message}",
-                            Toast.LENGTH_SHORT
+                            this, "Erro ao conectar à API: ${e.message}", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
