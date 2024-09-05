@@ -12,6 +12,13 @@
         android:hint="Nome do Viajante"
         android:minHeight="48dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Data de Nascimento"
+        android:textSize="16sp" />
+
     <DatePicker
         android:id="@+id/additional_traveler_birth_date_picker"
         android:layout_width="match_parent"

@@ -29,12 +29,20 @@
             android:hint="E-mail"
             android:minHeight="48dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Data de Nascimento"
+            android:textSize="16sp" />
+
         <DatePicker
             android:id="@+id/birthdate_date_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
+
 
         <Spinner
             android:id="@+id/gender_spinner"
