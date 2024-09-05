@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -27,4 +28,12 @@
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
+    <Button
+        android:id="@+id/confirm_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="Confirmar Data" />
 </LinearLayout>
