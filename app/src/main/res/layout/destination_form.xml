@@ -39,31 +39,36 @@
         android:id="@+id/hotel_address_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Endereço do Hotel" />
+        android:hint="Endereço do Hotel"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/destination_country_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="País de Destino" />
+        android:hint="País de Destino"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/destination_city_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cidade de Destino" />
+        android:hint="Cidade de Destino"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/budget_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Orçamento (ex: 1000 EUR, 500 GBP)" />
+        android:hint="Orçamento (ex: 1000 EUR, 500 GBP)"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/travel_purpose_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Propósito da Viagem" />
+        android:hint="Propósito da Viagem"
+        android:minHeight="48dp" />
 
     <TextView
         android:layout_width="match_parent"
