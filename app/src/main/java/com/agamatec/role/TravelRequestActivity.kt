@@ -105,9 +105,15 @@ class TravelRequestActivity : AppCompatActivity() {
 
         val datesLayout = destinationForm.findViewById<LinearLayout>(R.id.dates_layout)
         val addDateButton = destinationForm.findViewById<Button>(R.id.add_date_button)
-        var isAddingDate = false
+        val segmentDatesCheckbox =
+            destinationForm.findViewById<CheckBox>(R.id.segment_dates_checkbox)
+        var segmentedPeriod = false
         val datesList = mutableListOf<Pair<String, String>>()
 
+        segmentDatesCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            segmentedPeriod = isChecked
+            addDateButton.visibility = if (isChecked) View.VISIBLE else View.GONE
+        }
 
         val initialDatePair = layoutInflater.inflate(R.layout.date_pair_form, null)
         datesLayout.addView(initialDatePair)
@@ -170,7 +176,6 @@ class TravelRequestActivity : AppCompatActivity() {
             }
         }
 
-
         destinationForm.findViewById<Button>(R.id.confirm_destination_button).setOnClickListener {
             val hotelReserved =
                 destinationForm.findViewById<CheckBox>(R.id.hotel_reserved_checkbox).isChecked
@@ -186,6 +191,7 @@ class TravelRequestActivity : AppCompatActivity() {
                 destinationForm.findViewById<EditText>(R.id.travel_purpose_edit_text).text.toString()
 
             val destinationJson = JSONObject().apply {
+                put("segmentedPeriod", segmentedPeriod)
                 put("dateRanges", JSONArray().apply {
                     datesList.forEach { (departure, returnDate) ->
                         put(JSONObject().apply {
@@ -212,7 +218,6 @@ class TravelRequestActivity : AppCompatActivity() {
         }
     }
 
-
     private fun submitForm() {
         Log.d("TravelRequestActivity", "submitForm: Iniciando processo de envio de formulário")
 
@@ -226,7 +231,6 @@ class TravelRequestActivity : AppCompatActivity() {
                 "${birthdatePicker.dayOfMonth}/${birthdatePicker.month + 1}/${birthdatePicker.year}"
 
             val gender = findViewById<Spinner>(R.id.gender_spinner).selectedItem.toString()
-
 
             val jsonBody = JSONObject().apply {
                 put("mainTraveler", JSONObject().apply {
@@ -299,7 +303,8 @@ class TravelRequestActivity : AppCompatActivity() {
 
     private fun navigateToNextSteps() {
         Log.d(
-            "TravelRequestActivity", "navigateToNextSteps: Navegando para a tela de próximos passos"
+            "TravelRequestActivity",
+            "navigateToNextSteps: Navegando para a tela de próximos passos"
         )
         val intent = Intent(this, NextStepsActivity::class.java)
         startActivity(intent)
