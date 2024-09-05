@@ -47,12 +47,24 @@ class TravelRequestActivityTest {
 
         onView(withId(R.id.segment_dates_checkbox)).perform(scrollTo(), click())
 
+
         onView(withId(R.id.departure_date_picker)).perform(
             scrollTo(), setDate(2024, 10, 26)
         )
         onView(withId(R.id.return_date_picker)).perform(
             scrollTo(), setDate(2024, 10, 28)
         )
+        onView(withId(R.id.confirm_date_button)).perform(scrollTo(), click())
+
+
+        onView(withId(R.id.add_date_button)).perform(scrollTo(), click())
+        onView(withId(R.id.departure_date_picker)).perform(
+            scrollTo(), setDate(2024, 11, 3)
+        )
+        onView(withId(R.id.return_date_picker)).perform(
+            scrollTo(), setDate(2024, 11, 7)
+        )
+        onView(withId(R.id.confirm_date_button)).perform(scrollTo(), click())
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
@@ -71,19 +83,18 @@ class TravelRequestActivityTest {
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
 
-        onView(withId(R.id.add_date_button)).perform(scrollTo(), click())
-        onView(withId(R.id.departure_date_picker)).perform(
-            scrollTo(), setDate(2024, 11, 3)
-        )
-        onView(withId(R.id.return_date_picker)).perform(
-            scrollTo(), setDate(2024, 11, 7)
-        )
-
-
         onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
 
         onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
+
+        onView(withId(R.id.departure_date_picker)).perform(
+            scrollTo(), setDate(2024, 10, 28)
+        )
+        onView(withId(R.id.return_date_picker)).perform(
+            scrollTo(), setDate(2024, 11, 1)
+        )
+        onView(withId(R.id.confirm_date_button)).perform(scrollTo(), click())
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
@@ -101,18 +112,18 @@ class TravelRequestActivityTest {
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
 
-        onView(withId(R.id.departure_date_picker)).perform(
-            scrollTo(), setDate(2024, 10, 28)
-        )
-        onView(withId(R.id.return_date_picker)).perform(
-            scrollTo(), setDate(2024, 11, 1)
-        )
-
-
         onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
 
         onView(withId(R.id.add_destination_button)).perform(scrollTo(), click())
+
+        onView(withId(R.id.departure_date_picker)).perform(
+            scrollTo(), setDate(2024, 11, 7)
+        )
+        onView(withId(R.id.return_date_picker)).perform(
+            scrollTo(), setDate(2024, 11, 9)
+        )
+        onView(withId(R.id.confirm_date_button)).perform(scrollTo(), click())
 
         onView(withId(R.id.hotel_reserved_checkbox)).perform(scrollTo(), click())
         onView(withId(R.id.hotel_address_edit_text)).perform(
@@ -129,14 +140,6 @@ class TravelRequestActivityTest {
         onView(withId(R.id.budget_edit_text)).perform(
             scrollTo(), typeText("517.50 EUR"), closeSoftKeyboard()
         )
-
-        onView(withId(R.id.departure_date_picker)).perform(
-            scrollTo(), setDate(2024, 11, 7)
-        )
-        onView(withId(R.id.return_date_picker)).perform(
-            scrollTo(), setDate(2024, 11, 9)
-        )
-
 
         onView(withId(R.id.confirm_destination_button)).perform(scrollTo(), click())
 
@@ -156,13 +159,14 @@ class TravelRequestActivityTest {
 
         onView(withId(R.id.confirm_traveler_button)).perform(scrollTo(), click())
 
+
         onView(withId(R.id.notes_edit_text)).perform(
             scrollTo(),
             replaceText("Por favor, adicionar observações sobre restrições alimentares."),
             closeSoftKeyboard()
         )
 
-
+        
         onView(withId(R.id.submit_button)).perform(scrollTo(), click())
     }
 

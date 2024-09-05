@@ -29,6 +29,7 @@ class TravelRequestActivity : AppCompatActivity() {
     private var travelerCount = 1
     private val travelersList = mutableListOf<JSONObject>()
     private val destinationsList = mutableListOf<JSONObject>()
+    private var isAddingDate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,53 +105,71 @@ class TravelRequestActivity : AppCompatActivity() {
 
         val datesLayout = destinationForm.findViewById<LinearLayout>(R.id.dates_layout)
         val addDateButton = destinationForm.findViewById<Button>(R.id.add_date_button)
-        val segmentDatesCheckbox =
-            destinationForm.findViewById<CheckBox>(R.id.segment_dates_checkbox)
+        var isAddingDate = false
+        val datesList = mutableListOf<Pair<String, String>>()
 
 
         val initialDatePair = layoutInflater.inflate(R.layout.date_pair_form, null)
         datesLayout.addView(initialDatePair)
 
+        val confirmDateButton = initialDatePair.findViewById<Button>(R.id.confirm_date_button)
 
-        val datesList = mutableListOf<Pair<String, String>>()
+        confirmDateButton.setOnClickListener {
+            if (!isAddingDate) {
+                val departureDate =
+                    initialDatePair.findViewById<DatePicker>(R.id.departure_date_picker)
+                val returnDate = initialDatePair.findViewById<DatePicker>(R.id.return_date_picker)
 
-        segmentDatesCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+                val departureDateFormatted =
+                    "${departureDate.dayOfMonth}/${departureDate.month + 1}/${departureDate.year}"
+                val returnDateFormatted =
+                    "${returnDate.dayOfMonth}/${returnDate.month + 1}/${returnDate.year}"
+
+                datesList.add(Pair(departureDateFormatted, returnDateFormatted))
+
+                val dateLabel = TextView(this)
+                dateLabel.text = "Ida: $departureDateFormatted - Volta: $returnDateFormatted"
+                datesLayout.addView(dateLabel)
+
                 addDateButton.visibility = View.VISIBLE
-            } else {
-                addDateButton.visibility = View.GONE
-
-
-                while (datesLayout.childCount > 1) {
-                    datesLayout.removeViewAt(1)
-                }
-                datesList.clear()
+                isAddingDate = false
             }
         }
 
         addDateButton.visibility = View.GONE
 
         addDateButton.setOnClickListener {
+            if (!isAddingDate) {
+                datesLayout.removeAllViews()
 
-            datesLayout.removeAllViews()
+                val datePairView = layoutInflater.inflate(R.layout.date_pair_form, null)
+                datesLayout.addView(datePairView)
 
-            val datePairView = layoutInflater.inflate(R.layout.date_pair_form, null)
-            datesLayout.addView(datePairView)
+                isAddingDate = true
 
-            val departureDate = datePairView.findViewById<DatePicker>(R.id.departure_date_picker)
-            val returnDate = datePairView.findViewById<DatePicker>(R.id.return_date_picker)
+                val confirmNewDateButton =
+                    datePairView.findViewById<Button>(R.id.confirm_date_button)
+                confirmNewDateButton.setOnClickListener {
+                    val departureDate =
+                        datePairView.findViewById<DatePicker>(R.id.departure_date_picker)
+                    val returnDate = datePairView.findViewById<DatePicker>(R.id.return_date_picker)
 
-            val departureDateFormatted =
-                "${departureDate.dayOfMonth}/${departureDate.month + 1}/${departureDate.year}"
-            val returnDateFormatted =
-                "${returnDate.dayOfMonth}/${returnDate.month + 1}/${returnDate.year}"
+                    val departureDateFormatted =
+                        "${departureDate.dayOfMonth}/${departureDate.month + 1}/${departureDate.year}"
+                    val returnDateFormatted =
+                        "${returnDate.dayOfMonth}/${returnDate.month + 1}/${returnDate.year}"
 
-            datesList.add(Pair(departureDateFormatted, returnDateFormatted))
+                    datesList.add(Pair(departureDateFormatted, returnDateFormatted))
 
-            val dateLabel = TextView(this)
-            dateLabel.text = "Ida: $departureDateFormatted - Volta: $returnDateFormatted"
-            datesLayout.addView(dateLabel)
+                    val dateLabel = TextView(this)
+                    dateLabel.text = "Ida: $departureDateFormatted - Volta: $returnDateFormatted"
+                    datesLayout.addView(dateLabel)
+
+                    isAddingDate = false
+                }
+            }
         }
+
 
         destinationForm.findViewById<Button>(R.id.confirm_destination_button).setOnClickListener {
             val hotelReserved =
@@ -188,7 +207,6 @@ class TravelRequestActivity : AppCompatActivity() {
             val destinationLabel = TextView(this)
             destinationLabel.text = "Destino: $city, $country - Orçamento: $budget"
             destinationsLayout.addView(destinationLabel)
-
 
             destinationsLayout.removeView(destinationForm)
         }
